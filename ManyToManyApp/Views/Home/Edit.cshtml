@@ -1,0 +1,36 @@
+﻿@model ManyToManyApp.Models.Student
+@using ManyToManyApp.Models
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    <h4>Студент</h4>
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="editor-label"><b>Имя</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+    </div>
+
+    <div class="editor-label"><b>Фамилия</b></div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Surname)
+    </div>
+
+    <div class="editor-label"><b>Курсы</b></div>
+    foreach (Course c in ViewBag.Courses)
+    {
+        <input type="checkbox" name="selectedCourses" value="@c.Id"
+               @(Model.Courses.Contains(c) ? "checked=\"checked\"" : "") />@c.Name <br />
+    }
+
+    <p>
+        <input type="submit" value="Сохранить" />
+    </p>
+
+}
+
